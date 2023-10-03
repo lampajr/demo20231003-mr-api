@@ -1,0 +1,279 @@
+openapi: 3.0.2
+info:
+    title: Model Registry gh44 draft
+    version: 1.0.0
+    description: 'See also https://github.com/opendatahub-io/model-registry/issues/44#issue-1919724627'
+paths:
+    /versionedmodels:
+        summary: Path used to manage the list of versionedmodels.
+        description: >-
+            The REST endpoint/path used to list and create zero or more `VersionedModel` entities.  This path
+            contains a `GET` and `POST` operation to perform the list and create tasks, respectively.
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/VersionedModel'
+                    description: Successful response - returns an array of `VersionedModel` entities.
+            operationId: getVersionedModels
+            summary: List All VersionedModels
+            description: Gets a list of all `VersionedModel` entities.
+        post:
+            requestBody:
+                description: A new `VersionedModel` to be created.
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/VersionedModel'
+                required: true
+            responses:
+                '201':
+                    description: Successful response.
+            operationId: createVersionedModel
+            summary: Create a VersionedModel
+            description: Creates a new instance of a `VersionedModel`.
+    '/versionedmodels/{versionedmodelId}':
+        summary: Path used to manage a single VersionedModel.
+        description: >-
+            The REST endpoint/path used to get, update, and delete single instances of an `VersionedModel`. 
+            This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and
+            delete tasks, respectively.
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/VersionedModel'
+                    description: Successful response - returns a single `VersionedModel`.
+            operationId: getVersionedModel
+            summary: Get a VersionedModel
+            description: Gets the details of a single instance of a `VersionedModel`.
+        put:
+            requestBody:
+                description: Updated `VersionedModel` information.
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/VersionedModel'
+                required: true
+            responses:
+                '202':
+                    description: Successful response.
+            operationId: updateVersionedModel
+            summary: Update a VersionedModel only on updatable fields
+            description: Updates an existing `VersionedModel` only on updatable fields.
+        delete:
+            responses:
+                '204':
+                    description: Successful response.
+            operationId: deleteVersionedModel
+            summary: Delete a VersionedModel
+            description: Deletes an existing `VersionedModel`.
+        parameters:
+            -
+                name: versionedmodelId
+                description: A unique identifier for a `VersionedModel`.
+                schema:
+                    type: string
+                in: path
+                required: true
+    /registeredmodels:
+        summary: Path used to manage the list of registeredmodels.
+        description: >-
+            The REST endpoint/path used to list and create zero or more `RegisteredModel` entities.  This path
+            contains a `GET` and `POST` operation to perform the list and create tasks, respectively.
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/RegisteredModel'
+                    description: Successful response - returns an array of `RegisteredModel` entities.
+            operationId: getRegisteredModels
+            summary: List All RegisteredModels
+            description: Gets a list of all `RegisteredModel` entities.
+        post:
+            requestBody:
+                description: A new `RegisteredModel` to be created.
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RegisteredModel'
+                required: true
+            responses:
+                '201':
+                    description: Successful response.
+            operationId: createRegisteredModel
+            summary: Create a RegisteredModel
+            description: Creates a new instance of a `RegisteredModel`.
+    '/registeredmodels/{registeredmodelId}':
+        summary: Path used to manage a single RegisteredModel.
+        description: >-
+            The REST endpoint/path used to get, update, and delete single instances of an `RegisteredModel`. 
+            This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and
+            delete tasks, respectively.
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RegisteredModel'
+                    description: Successful response - returns a single `RegisteredModel`.
+            operationId: getRegisteredModel
+            summary: Get a RegisteredModel
+            description: Gets the details of a single instance of a `RegisteredModel`.
+        put:
+            requestBody:
+                description: Updated `RegisteredModel` information.
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RegisteredModel'
+                required: true
+            responses:
+                '202':
+                    description: Successful response.
+            operationId: updateRegisteredModel
+            summary: Update a RegisteredModel
+            description: Updates an existing `RegisteredModel`.
+        delete:
+            responses:
+                '204':
+                    description: Successful response.
+            operationId: deleteRegisteredModel
+            summary: Delete a RegisteredModel
+            description: Deletes an existing `RegisteredModel`.
+        parameters:
+            -
+                name: registeredmodelId
+                description: A unique identifier for a `RegisteredModel`.
+                schema:
+                    type: string
+                in: path
+                required: true
+components:
+    schemas:
+        Environment:
+            title: Root Type for Environment
+            description: ''
+            type: object
+            properties:
+                name:
+                    type: string
+                uri:
+                    type: string
+            example:
+                name: My Environment
+                uri: 'http://localhost:8080'
+        VersionedModel:
+            title: Root Type for VersionedModel
+            description: ''
+            type: object
+            properties:
+                name:
+                    type: string
+                id:
+                    type: string
+                version:
+                    type: string
+                tags:
+                    type: array
+                    items:
+                        type: string
+                labels:
+                    type: array
+                    items:
+                        type: string
+                environments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Environment'
+                created date:
+                    format: date-time
+                    type: string
+                updated date:
+                    format: date-time
+                    type: string
+            example:
+                name: my VersionedModel
+                id: ae123-78932-64893
+                version: v1
+                tags:
+                    - Staging
+                labels:
+                    - tutorial
+                    - linreg
+                environments:
+                    -
+                        name: My Environment
+                        uri: 'http://localhost:8080'
+                created date: '20231002T12:34:56'
+                updated date: '20231002T12:34:56'
+        RegisteredModel:
+            title: Root Type for RegisteredModel
+            description: ''
+            type: object
+            properties:
+                name:
+                    type: string
+                labels:
+                    type: array
+                    items:
+                        type: string
+                versions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/VersionedModel'
+            example:
+                name: My RegisteredModel
+                labels:
+                    - tutorial
+                    - linreg
+                versions:
+                    -
+                        name: some text
+                        id: some text
+                        version: some text
+                        tags:
+                            - some text
+                            - some text
+                        labels:
+                            - some text
+                            - some text
+                        environments:
+                            -
+                                name: some text
+                                uri: some text
+                            -
+                                name: some text
+                                uri: some text
+                        created date: '2018-02-10T09:30Z'
+                        updated date: '2018-02-10T09:30Z'
+                    -
+                        name: some text
+                        id: some text
+                        version: some text
+                        tags:
+                            - some text
+                            - some text
+                        labels:
+                            - some text
+                            - some text
+                        environments:
+                            -
+                                name: some text
+                                uri: some text
+                            -
+                                name: some text
+                                uri: some text
+                        created date: '2018-02-10T09:30Z'
+                        updated date: '2018-02-10T09:30Z'
