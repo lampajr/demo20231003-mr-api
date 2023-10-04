@@ -12,7 +12,7 @@ def main():
                 arguments={'title': 'Model Registry gh44 draft'},
                 pythonic_params=True)
 
-    app.run(port=8080)
+    app.run(port=8081)
 
 
 if __name__ == '__main__':

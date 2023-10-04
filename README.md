@@ -58,7 +58,7 @@ Install `openapi-generator-cli` following these [instructions](https://github.co
 From the root of the directory run the following command:
 
 ```bash
-$ openapi-generator-cli generate -i openapi/openapiv3.yaml -g python-flask -o . --package-name mr
+$ openapi-generator-cli generate -i openapi/openapi.yaml -g python-flask -o . --package-name mr
 ```
 
 > **NOTE**: running the previous command you will regenerate `/mr/controllers`, `/mr/models` and `/mr/openapi`
